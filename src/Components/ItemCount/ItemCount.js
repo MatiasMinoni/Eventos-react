@@ -1,72 +1,71 @@
-import React from "react";
-import { useState } from "react";
-import 'materialize-css/dist/css/materialize.min.css';
+import React, { useState } from 'react'
 
+const ItemCount = ({ initial, onAdd, stock }) => {
 
+    const [count, setCount] = useState(initial);
 
-
-const MiComponente =({initial, stock, setStock, cantidad}) => {
-[stock, setStock] = useState(initial);
-
-function onAdd(){
-        
-setStock(stock+1);
-onAdd=document.getElementById("onAdd")
-onRemove=document.getElementById("onRemove")
-const add_Cart=document.getElementById("addCart");
-
-onAdd.disabled=false;
-onRemove.disabled=false;
-add_Cart.disabled=false;
-
-    while
-    (stock>=cantidad-1){
-        setStock(cantidad);
-      onAdd.disabled=true;
-        onRemove.disabled=false;
-        
-        break;}
-      
-}
-function onRemove(){
-    onAdd=document.getElementById("onAdd")
-    onRemove=document.getElementById("onRemove")
-    const add_Cart=document.getElementById("addCart");
-setStock(stock-1);
-
-
-    onAdd.disabled=false;
-    while (stock<=1){   
-        setStock(0);
-        onAdd.disabled=false;
-        onRemove.disabled=true;
-        add_Cart.disabled=true;
-       break;
+    const handlerClickAdd = () => {
+        if (count < stock) {
+            setCount(count + 1);
+        }
     }
-    if(stock<=1){
-       
+
+    const handlerClickSubtrack = () => {
+        if (count > 1) {
+            setCount(count - 1);
+        }
     }
+
+    const handlerClickAddToCart = () => {
+        onAdd(count);
+    }
+
+    return (
+        <div style={styles.container}>
+            <div style={styles.containerButtons}>
+                <button style={styles.button} onClick={() => handlerClickSubtrack()}>-</button>
+                <h2>{count}</h2>
+                <button style={styles.button} onClick={() => handlerClickAdd()}>+</button>
+            </div>
+            <button style={styles.buttonAdd} onClick={() => handlerClickAddToCart()}>Agregar al carrito</button>
+        </div>
+    );
 }
 
-return (
-<>
+const styles = {
+    container: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        margin: '10px'
+    },
+    button: {
+        width: "40px",
+        height: "40px",
+        borderRadius: "50%",
+        backgroundColor: "black",
+        color: "white",
+        fontSize: "20px",
+        fontWeight: "bold",
+        margin: "10px",
+    },
+    containerButtons: {
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center"
+    },
+    buttonAdd: {
+        width: "30%",
+        height: "50px",
+        borderRadius: "50%",
+        backgroundColor: "green",
+        color: "white",
+        fontSize: "20px",
+        fontWeight: "bold",
+    }
 
-<div className="valign-wrapper center-align contador_carrito">
-
-<p>Agregar al carrito</p>
-
-<button  className="waves-effect waves-light btn" id="onAdd"  onClick={onAdd}> + </button>
-
-<p>    {stock}    </p>
-
-<button className="waves-effect waves-light btn" id="onRemove" onClick={onRemove}> - </button>
-
-<button className="waves-effect waves-light btn" id="addCart" >  Agregar al carrito</button>
-
-</div>
-</> 
-)
 }
 
-
-export default MiComponente;
+export default ItemCount
