@@ -1,12 +1,15 @@
+import { AddCardTwoTone } from "@mui/icons-material";
 import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import MiComponente from "../../ItemCount/ItemCount"
 
+function carrito(){
+// reemplazar texto
+document.getElementById("addCart").innerHTML="Comprar";
+
+}
 
 const ItemDetail = ({ product }) => {
-
-
-
 
 
   return (
@@ -20,10 +23,10 @@ const ItemDetail = ({ product }) => {
             <div class="card-content">
               <p >Precio: {product.price}</p>
               <p >{product.description}</p> 
-              <p ></p> 
+      
             </div>
             <div class="card-action">
-              <Link to="/Carrito">Añadir al carrtito</Link>
+              <Link to="/Carrito" id="carrito" onClick={carrito}>Añadir al carrtito</Link>
            
             </div>
             
